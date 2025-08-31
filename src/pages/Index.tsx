@@ -103,14 +103,10 @@ const Index = () => {
       {/* Navigation Tabs */}
       <div className="container mx-auto px-4 py-8">
         <Tabs value={selectedTab} onValueChange={setSelectedTab} className="w-full">
-          <TabsList className="grid grid-cols-5 w-full max-w-2xl mx-auto mb-8">
+          <TabsList className="grid grid-cols-4 w-full max-w-2xl mx-auto mb-8">
             <TabsTrigger value="home">
               <Icon name="Home" size={16} className="mr-2" />
               Главная
-            </TabsTrigger>
-            <TabsTrigger value="instructions">
-              <Icon name="Info" size={16} className="mr-2" />
-              Инструкция
             </TabsTrigger>
             <TabsTrigger value="wishlist">
               <Icon name="Gift" size={16} className="mr-2" />
@@ -171,38 +167,7 @@ const Index = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="instructions" className="max-w-3xl mx-auto">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Icon name="BookOpen" size={24} className="mr-2" />
-                  Как пользоваться вишлистом
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-start space-x-3">
-                  <Badge className="shrink-0">1</Badge>
-                  <p>Перейдите в раздел "Вишлист" чтобы посмотреть все желаемые подарки</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Badge className="shrink-0">2</Badge>
-                  <p>Выберите подарок, который хотели бы мне подарить</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Badge className="shrink-0">3</Badge>
-                  <p>Нажмите "Забронировать" и укажите ваше имя</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Badge className="shrink-0">4</Badge>
-                  <p>Подарок станет недоступен для других гостей</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <Badge className="shrink-0">5</Badge>
-                  <p>Связаться со мной можно в разделе "Контакты"</p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+
 
           <TabsContent value="wishlist">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
