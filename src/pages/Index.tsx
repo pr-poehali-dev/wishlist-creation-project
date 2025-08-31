@@ -11,6 +11,7 @@ interface Gift {
   description: string;
   price: string;
   imageUrl: string;
+  category: string;
   isReserved: boolean;
   reservedBy?: string;
 }
@@ -19,35 +20,75 @@ const Index = () => {
   const [gifts, setGifts] = useState<Gift[]>([
     {
       id: '1',
-      title: 'Уютный плед',
-      description: 'Мягкий шерстяной плед для холодных вечеров',
-      price: '3 500 ₽',
-      imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop',
+      title: 'Букет пионов',
+      description: 'Нежные розовые пионы в красивой упаковке',
+      price: '4 500 ₽',
+      imageUrl: 'https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400&h=300&fit=crop',
+      category: 'Цветы',
       isReserved: false
     },
     {
-      id: '2', 
-      title: 'Керамическая кружка',
-      description: 'Handmade кружка с теплым дизайном',
-      price: '1 200 ₽',
-      imageUrl: 'https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?w=400&h=300&fit=crop',
+      id: '2',
+      title: 'Орхидея в горшке',
+      description: 'Элегантная белая орхидея для дома',
+      price: '2 800 ₽',
+      imageUrl: 'https://images.unsplash.com/photo-1583160247711-2191776b4b91?w=400&h=300&fit=crop',
+      category: 'Цветы',
       isReserved: true,
       reservedBy: 'Мама'
     },
     {
       id: '3',
-      title: 'Ароматические свечи',
-      description: 'Набор свечей с запахом ванили и корицы',
-      price: '2 100 ₽',
-      imageUrl: 'https://images.unsplash.com/photo-1602874801007-641c0a7c7d2d?w=400&h=300&fit=crop',
+      title: 'Палетка теней',
+      description: 'Профессиональная палетка с розовыми оттенками',
+      price: '3 200 ₽',
+      imageUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop',
+      category: 'Красота',
       isReserved: false
     },
     {
       id: '4',
-      title: 'Книга рецептов',
-      description: 'Семейные рецепты для уютных ужинов',
-      price: '1 800 ₽',
-      imageUrl: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
+      title: 'Набор кистей для макияжа',
+      description: 'Мягкие кисти в розовом чехле',
+      price: '2 100 ₽',
+      imageUrl: 'https://images.unsplash.com/photo-1583241477904-ffdc736a2d5e?w=400&h=300&fit=crop',
+      category: 'Красота',
+      isReserved: false
+    },
+    {
+      id: '5',
+      title: 'Розовый кашемировый шарф',
+      description: 'Мягкий теплый шарф из натурального кашемира',
+      price: '5 800 ₽',
+      imageUrl: 'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=400&h=300&fit=crop',
+      category: 'Одежда',
+      isReserved: false
+    },
+    {
+      id: '6',
+      title: 'Шелковая пижама',
+      description: 'Нежная пижама из натурального шелка',
+      price: '7 200 ₽',
+      imageUrl: 'https://images.unsplash.com/photo-1544441892-794166f1e3be?w=400&h=300&fit=crop',
+      category: 'Одежда',
+      isReserved: false
+    },
+    {
+      id: '7',
+      title: 'Мастер-класс по гончарному делу',
+      description: 'Индивидуальный урок создания керамики',
+      price: '4 000 ₽',
+      imageUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop',
+      category: 'Что-то необычное',
+      isReserved: false
+    },
+    {
+      id: '8',
+      title: 'Полет на воздушном шаре',
+      description: 'Романтическое путешествие над городом',
+      price: '12 000 ₽',
+      imageUrl: 'https://images.unsplash.com/photo-1507034589631-9433cc6bc453?w=400&h=300&fit=crop',
+      category: 'Что-то необычное',
       isReserved: false
     }
   ]);
@@ -170,58 +211,72 @@ const Index = () => {
 
 
           <TabsContent value="wishlist">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {gifts.map(gift => (
-                <Card key={gift.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="aspect-video overflow-hidden">
-                    <img 
-                      src={gift.imageUrl} 
-                      alt={gift.title}
-                      className="w-full h-full object-cover transition-transform hover:scale-105"
-                    />
-                  </div>
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-lg">{gift.title}</CardTitle>
-                      <Badge variant={gift.isReserved ? "destructive" : "default"}>
-                        {gift.price}
-                      </Badge>
+            <div className="space-y-12">
+              {['Цветы', 'Красота', 'Одежда', 'Что-то необычное'].map(category => {
+                const categoryGifts = gifts.filter(gift => gift.category === category);
+                return (
+                  <div key={category}>
+                    <div className="flex items-center mb-6">
+                      <div className="flex-1 h-px bg-border"></div>
+                      <h2 className="px-6 text-2xl font-bold text-foreground">{category}</h2>
+                      <div className="flex-1 h-px bg-border"></div>
                     </div>
-                    <CardDescription>{gift.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    {gift.isReserved ? (
-                      <div className="space-y-2">
-                        <Badge variant="secondary" className="w-full justify-center py-2">
-                          <Icon name="Check" size={16} className="mr-2" />
-                          Забронировано: {gift.reservedBy}
-                        </Badge>
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          onClick={() => handleUnreserveGift(gift.id)}
-                          className="w-full"
-                        >
-                          Отменить бронь
-                        </Button>
-                      </div>
-                    ) : (
-                      <Button 
-                        onClick={() => {
-                          const guestName = prompt('Как вас зовут?');
-                          if (guestName) {
-                            handleReserveGift(gift.id, guestName);
-                          }
-                        }}
-                        className="w-full"
-                      >
-                        <Icon name="ShoppingCart" size={16} className="mr-2" />
-                        Забронировать
-                      </Button>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {categoryGifts.map(gift => (
+                        <Card key={gift.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                          <div className="aspect-video overflow-hidden">
+                            <img 
+                              src={gift.imageUrl} 
+                              alt={gift.title}
+                              className="w-full h-full object-cover transition-transform hover:scale-105"
+                            />
+                          </div>
+                          <CardHeader>
+                            <div className="flex justify-between items-start">
+                              <CardTitle className="text-lg">{gift.title}</CardTitle>
+                              <Badge variant={gift.isReserved ? "destructive" : "default"}>
+                                {gift.price}
+                              </Badge>
+                            </div>
+                            <CardDescription>{gift.description}</CardDescription>
+                          </CardHeader>
+                          <CardContent>
+                            {gift.isReserved ? (
+                              <div className="space-y-2">
+                                <Badge variant="secondary" className="w-full justify-center py-2">
+                                  <Icon name="Check" size={16} className="mr-2" />
+                                  Забронировано: {gift.reservedBy}
+                                </Badge>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  onClick={() => handleUnreserveGift(gift.id)}
+                                  className="w-full"
+                                >
+                                  Отменить бронь
+                                </Button>
+                              </div>
+                            ) : (
+                              <Button 
+                                onClick={() => {
+                                  const guestName = prompt('Как вас зовут?');
+                                  if (guestName) {
+                                    handleReserveGift(gift.id, guestName);
+                                  }
+                                }}
+                                className="w-full"
+                              >
+                                <Icon name="ShoppingCart" size={16} className="mr-2" />
+                                Забронировать
+                              </Button>
+                            )}
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </TabsContent>
 
